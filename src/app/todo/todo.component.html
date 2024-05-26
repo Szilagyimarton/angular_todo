@@ -1,0 +1,21 @@
+<div class="todo" *ngIf="!todoToEdit; else elseBlock">
+      <h3>{{ todo.title }}</h3>
+      <h4>{{ todo.date }}</h4>
+      <p>{{ todo.description }}</p>
+    <div>
+      <button (click)="deleteTodo(todo.id)">Delete</button>
+      <button (click)="toggleEditTodo()">Edit</button>
+    </div>
+</div>
+<ng-template #elseBlock>
+    <div class="todo">
+      <input type="text" name="title" id="title" [(ngModel)]="editedTodo.title" placeholder="{{todo.title}}">
+      <input type="text" name="date" id="date" placeholder="{{todo.date}}" [(ngModel)]="editedTodo.date">
+      <textarea type="text" name="description" id="description" [(ngModel)]="editedTodo.description" placeholder="{{todo.description}}"></textarea>
+      <span>{{allFieldsRequired}}</span>
+      <div>
+        <button (click)="toggleEditTodo()">Back</button>
+        <button (click)="saveEditedTodo(todo.id)">Save</button>
+      </div>
+    </div>
+</ng-template>

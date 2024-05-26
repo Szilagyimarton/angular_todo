@@ -1,0 +1,7 @@
+<h1>Home</h1>
+<button (click)="toggleShowNewTodo()">{{ showNewTodo ? "Close" : "Add new Todo"}}</button>
+<app-new-todo *ngIf="showNewTodo" (todoAdded)="addNewTodo($event)"></app-new-todo>
+<h2>Your todos:</h2>
+<div class="todos">
+  <app-todo  *ngFor="let todo of todos" [todo]="todo" ></app-todo>
+</div>

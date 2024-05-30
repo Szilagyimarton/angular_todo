@@ -2,6 +2,7 @@
       <h3>{{ todo.title }}</h3>
       <h4>{{ todo.date }}</h4>
       <p>{{ todo.description }}</p>
+      <p>{{ todo.priority }}</p>
     <div>
       <button (click)="deleteTodo(todo.id)">Delete</button>
       <button (click)="toggleEditTodo()">Edit</button>
@@ -12,6 +13,13 @@
       <input type="text" name="title" id="title" [(ngModel)]="editedTodo.title" placeholder="{{todo.title}}">
       <input type="text" name="date" id="date" placeholder="{{todo.date}}" [(ngModel)]="editedTodo.date">
       <textarea type="text" name="description" id="description" [(ngModel)]="editedTodo.description" placeholder="{{todo.description}}"></textarea>
+      <label for="prioirty">Priority:</label>
+      <select name="priority" id="priority" [(ngModel)]="editedTodo.priority" >
+        <option [ngValue]="priorityValues.low" >Low</option>
+        <option [ngValue]="priorityValues.medium">Medium</option>
+        <option [ngValue]="priorityValues.high">High</option>
+      </select>
+
       <span>{{allFieldsRequired}}</span>
       <div>
         <button (click)="toggleEditTodo()">Back</button>

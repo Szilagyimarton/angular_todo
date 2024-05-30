@@ -2,6 +2,15 @@
 <button (click)="toggleShowNewTodo()">{{ showNewTodo ? "Close" : "Add new Todo"}}</button>
 <app-new-todo *ngIf="showNewTodo" (todoAdded)="addNewTodo($event)"></app-new-todo>
 <h2>Your todos:</h2>
+<div class="filterTodos">
+  <label for="filterByPriority">Priority</label>
+  <select name="filterByPriority" id="filterByPriority" [(ngModel)]="filterByPrioirityValue" (change)="filteredByPriority()">
+    <option value="All">All</option>
+    <option value="Low">Low</option>
+    <option value="Medium">Medium</option>
+    <option value="High">High</option>
+  </select>
+</div>
 <div class="todos">
-  <app-todo  *ngFor="let todo of todos" [todo]="todo" ></app-todo>
+  <app-todo  *ngFor="let todo of filteredByValueTodos" [todo]="todo" ></app-todo>
 </div>

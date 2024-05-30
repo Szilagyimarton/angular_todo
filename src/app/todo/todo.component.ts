@@ -17,18 +17,26 @@ export class TodoComponent {
   @Input() todo:todo = {
     title: '',
     date: '',
-    description: ''
+    description: '',
+    priority:''
   }
   
   todoToEdit:boolean = false
   httpClient:HttpClient = inject(HttpClient)
   allFieldsRequired:string = ""
 
+  priorityValues = {
+    low:"Low",
+    medium: "Medium",
+    high: "High"
+  }
   editedTodo: todo = {
     title:"",
     date:"",
-    description:""
+    description:"",
+    priority:this.priorityValues.low
   } 
+
   toggleEditTodo(){
     this.todoToEdit = !this.todoToEdit
   }

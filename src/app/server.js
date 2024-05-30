@@ -37,13 +37,14 @@ app.post('/newtodo',(req,res) => {
   const title = req.body.title
   const date = req.body.date
   const description = req.body.description
+  const priority = req.body.priority
 
-  if (!title || !date || !description) {
+  if (!title || !date || !description || !priority) {
      res.send({ error: "All fields are required" });
   }
 
-  const query =`INSERT INTO todos (title,date,description) values (?,?,?) `
-  connection.query(query,[title,date, description],(err, result) => {
+  const query =`INSERT INTO todos (title,date,description,priority) values (?,?,?,?) `
+  connection.query(query,[title,date, description,priority],(err, result) => {
     if(err){
       console.log(err)
        res.send({error: "Internal Server Error"})
@@ -53,8 +54,7 @@ app.post('/newtodo',(req,res) => {
 })
 
 app.put('/edit/:id',(req,res) => {
-  console.log(req.params.id)
-  connection.query(`update todos set title=?,date=?,description=? where id = ?`,[req.body.title,req.body.date,req.body.description,req.params.id],(err,result)=>{
+  connection.query(`update todos set title=?,date=?,description=?, priority=? where id = ?`,[req.body.title,req.body.date,req.body.description,req.body.priority,req.params.id],(err,result)=>{
     if(err){
       res.send(err)
     }

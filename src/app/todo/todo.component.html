@@ -1,6 +1,6 @@
 <div class="todo" *ngIf="!todoToEdit; else elseBlock">
       <h3>{{ todo.title }}</h3>
-      <h4>{{ todo.date }}</h4>
+      <h4>{{ todo.date === today ? "Today" : formatDate(todo.date) }}</h4>
       <p>{{ todo.description }}</p>
       <p>{{ todo.priority }}</p>
     <div>

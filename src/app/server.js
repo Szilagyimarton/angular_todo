@@ -12,19 +12,19 @@ const connection = mysql.createConnection({
 })
 const app = express()
 
+//Middlewares
 app.use(cors())
 app.use(bodyParser.json());
 
+//All todos
 app.get('/records',function(_req,res){
-  // connection.connect()
-
   connection.query("select * from todos",function(err,result){
       if(err)throw err
       res.send(result)
   })
-  // connection.destroy();
-
 })
+
+//Delete a todo
 app.delete("/delete/:id",(req,res) => {
   connection.query(`delete from todos where id=?`,[req.params.id],(err,result) => {
     if(err){
@@ -33,6 +33,8 @@ app.delete("/delete/:id",(req,res) => {
     res.send(result)
   })
 })
+
+//Add new todo
 app.post('/newtodo',(req,res) => {
   const title = req.body.title
   const date = req.body.date
@@ -53,6 +55,8 @@ app.post('/newtodo',(req,res) => {
   })
 })
 
+
+//Edit a todo
 app.put('/edit/:id',(req,res) => {
   connection.query(`update todos set title=?,date=?,description=?, priority=? where id = ?`,[req.body.title,req.body.date,req.body.description,req.body.priority,req.params.id],(err,result)=>{
     if(err){
@@ -62,7 +66,8 @@ app.put('/edit/:id',(req,res) => {
     res.send({message: `Record with id: ${req.params.id} is updated!`})
   })
 })
-app.listen(1000,()=>{ 
 
+
+app.listen(1000,()=>{ 
   console.log("Server is started at http://localhost:1000  address")
 })

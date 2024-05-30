@@ -36,12 +36,11 @@ constructor(private makeUppercase:MakeFirstLetterUppercaseService){}
 
   addTodo(){
     if(this.newTodo.title && this.newTodo.date && this.newTodo.description && this.newTodo.priority){
+      console.log(this.newTodo.date)
       this.allFieldIsRequired = ""
       this.newTodo.title = this.makeUppercase.firstLetter(this.newTodo.title)
-      this.newTodo.date = this.makeUppercase.firstLetter(this.newTodo.date)
       this.newTodo.description = this.makeUppercase.firstLetter(this.newTodo.description)
       this.todoAdded.emit(this.newTodo)
-      console.log(this.newTodo.priority)
       this.newTodo = { title: '', date: '', description: '' ,priority:""}
     }else{
       this.allFieldIsRequired = "All field is required!"

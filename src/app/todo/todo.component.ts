@@ -14,6 +14,7 @@ import { MakeFirstLetterUppercaseService } from '../services/make-first-letter-u
 })
 export class TodoComponent {
   constructor(private homepageComponent: HomepageComponent, private makeFirstLetter:MakeFirstLetterUppercaseService) { }
+
   @Input() todo:todo = {
     title: '',
     date: '',
@@ -24,6 +25,7 @@ export class TodoComponent {
   todoToEdit:boolean = false
   httpClient:HttpClient = inject(HttpClient)
   allFieldsRequired:string = ""
+  today:string = this.homepageComponent.today
 
   priorityValues = {
     low:"Low",
@@ -36,6 +38,25 @@ export class TodoComponent {
     description:"",
     priority:this.priorityValues.low
   } 
+
+  formatDate(value:string){
+    let date  = new Date(value)
+    let month = date.getMonth() 
+    let day = date.getDate() 
+    let MONTHS = ["January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"]
+    return `${MONTHS[month]} ${day}`
+  }
 
   toggleEditTodo(){
     this.todoToEdit = !this.todoToEdit
